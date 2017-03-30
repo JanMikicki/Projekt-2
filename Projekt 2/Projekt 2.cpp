@@ -20,24 +20,23 @@ class ciezarowki {
            float getCapacity(){return capacity;}
             void zdejmij()
             {
-                    if (Stack.size() > 0)
+                    if (not Stack.empty())
                         {
                             weight -= Stack.top();
                             Stack.pop();
                         }
-                    else cerr<<"Empty"<<endl;
 
             }
 
-            void doloz(int i)
+            bool doloz(float i)
              {
                     if (weight+i<= capacity)
                         {
                             weight+=i;
                             Stack.push(i);
-                            cout<<"push"<<i<<endl;
+                            return 1;
                         }
-                    else cerr<<"Full"<<endl;
+                    else return 0;
             }
 
             float& top() { return Stack.top();}
@@ -51,17 +50,21 @@ class ciezarowki {
       };
 
 
+int ilosc_paczek;
+float pojemnosc=0;
+queue<float> kolejka;
+vector<ciezarowki> stos_pojazdow;
 
 
 
 
-
-
-void writeStack (ciezarowki*);
-void writeStack (ciezarowki);
+void writeStack (ciezarowki, vector<ciezarowki>);
 int start();
-void tworzenie_kolejki(queue<float>,int);
-
+void tworzenie_kolejki();
+void pisz_kolejke(queue<float>);
+void dodaj_pojazd();
+void ladowanie();
+void pisz_pojazd(ciezarowki);
 
 
 
@@ -69,31 +72,26 @@ int main(void)
 {
     srand(time(NULL));
 
-    int ilosc_paczek=start();
+    ilosc_paczek=start();
 
-    queue<float> kolejka;
+   /* float z;
+    z=(stos_pojazdow.front()).getCapacity();
+    cout<<setprecision(3)<<z<<endl<<endl;*/
 
-    float z;
-    ciezarowki ciezarowka(99.9);
-    z=ciezarowka.getCapacity();
-    cout<<setprecision(3)<<z<<endl<<endl;
-
-    tworzenie_kolejki(kolejka,ilosc_paczek);
-
-    int x=2;
-
+    tworzenie_kolejki();
     cout<<endl<<endl;
 
-     for (int i=1; i<=x; i++)
-     {
-        ciezarowka.doloz(i);
-     }
+    pisz_kolejke(kolejka);
 
-      writeStack(ciezarowka);
-     cout<<endl<<ciezarowka.size() << endl;
 
-     writeStack(&ciezarowka);
-     cout<<endl<<ciezarowka.size() << endl;
+    while(not kolejka.empty())
+    {
+        dodaj_pojazd();
+    }
+
+
+
+cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
 
      system("pause");
      return 0;
@@ -108,9 +106,9 @@ int start()
     return x;
 }
 
-void tworzenie_kolejki(queue<float> kolejka,int ilosc)
+void tworzenie_kolejki()
 {
-    for(int i=0;i<ilosc;i++)
+    for(int i=0;i<ilosc_paczek;i++)
     {
         int z;
         z= (rand()%3)+1;
@@ -118,29 +116,127 @@ void tworzenie_kolejki(queue<float> kolejka,int ilosc)
         y = rand()%99;
         x = ( x / (y+1) ) * z;
        kolejka.push(x);
-       cout<<setw(2)<<i+1<<"    "<<setprecision(3)<<x<<endl;
     }
 }
 
-void writeStack (ciezarowki ciezarowka)
+void pisz_kolejke(queue<float> kolejka)
 {
-   while ( not ciezarowka.empty())
-   {
-         cout<<setw(4)<<ciezarowka.top();
-         ciezarowka.zdejmij();                   // operuje na kopii - nie zmienia oryginalu
-   }
-   cout<<endl;
+    int x=0;
+
+    cout<<"     ";
+
+    while(not kolejka.empty())
+    {
+        cout<<"  "<<setprecision(3)<<kolejka.front()<<"  ";
+        kolejka.pop();
+        x++;
+    }
+
+    cout<<"\n   ";
+
+    while(x)
+    {
+        cout<<"---------";
+        x--;
+    }
+     cout<<">\n"<<endl;
 }
 
-
-
-void writeStack (ciezarowki *ciezarowka)
+void dodaj_pojazd()
 {
-   while ( not (*ciezarowka).empty())
-   {
-         cout<<setw(4)<<(*ciezarowka).top();
-         (*ciezarowka).zdejmij();                   // operuje na oryginale - oproznia stos
-   }
-   cout<<endl;
+    cout<<"\n\n  Pojemnosc ciezarowki: ";
+    cin>>pojemnosc;
+
+    ciezarowki ciezarowka(pojemnosc);
+
+    stos_pojazdow.push_back(ciezarowka);
+
+    ladowanie();
 }
+
+void ladowanie()
+{
+    bool x=1;
+
+    int licznik=0;
+
+    vector<float> buf;
+
+    while(not kolejka.empty())
+    {
+        buf.push_back(kolejka.front());
+        kolejka.pop();
+    }
+
+    while(x)
+    {
+        if(not buf.empty())
+        {
+            x=(stos_pojazdow.back()).doloz(buf.back());
+
+
+            if (x==1)
+                {
+                    licznik++;
+                    buf.pop_back();
+                }
+
+        }
+
+       else x=0;
+    }
+
+    while(not buf.empty())
+        {
+            kolejka.push(buf.front());
+            buf.erase(buf.begin());
+        }
+
+
+    pisz_pojazd((stos_pojazdow.back()));
+
+     cout<<setprecision(3)<<"  Zaladowano: "<<licznik<<" pacz. o masie: "<<(stos_pojazdow.back()).getWeight()<<endl<<endl<<endl;
+}
+
+void pisz_pojazd(ciezarowki pojazd)
+{
+    int licznik=0,x;
+
+    cout<<"\n   /---| ";
+
+    ciezarowki buf(pojazd.getCapacity());
+
+     while(not pojazd.empty())
+    {
+        buf.doloz(pojazd.top());
+        pojazd.zdejmij();
+    }
+
+    while(not buf.empty())
+    {
+       cout<<setprecision(3)<< setw(5)<<buf.top()<<" ";
+       buf.zdejmij();
+       licznik++;
+    }
+
+    x=licznik;
+
+    cout<<"\n   |---| ";
+
+    while(x)
+    {
+       cout<<"------";
+       x--;
+    }
+
+    cout<<"\n   ";
+
+    while(licznik+1)
+    {
+       cout<<" o  o ";
+       licznik--;
+    }
+
+}
+
 
