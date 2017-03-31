@@ -20,7 +20,7 @@ class ciezarowki {
            float getCapacity(){return capacity;}
             void zdejmij()
             {
-                    if (not Stack.empty())
+                    if (!Stack.empty())
                         {
                             weight -= Stack.top();
                             Stack.pop();
@@ -50,8 +50,8 @@ class ciezarowki {
       };
 
 
-int ilosc_paczek, licznik=0;
-float pojemnosc=0;
+int ilosc_paczek, licznik = 0;
+float pojemnosc = 0;
 queue<float> kolejka;
 vector<ciezarowki> stos_pojazdow;
 
@@ -74,16 +74,12 @@ int main(void)
 
     ilosc_paczek=start();
 
-   /* float z;
-    z=(stos_pojazdow.front()).getCapacity();
-    cout<<setprecision(3)<<z<<endl<<endl;*/
-
     tworzenie_kolejki();
     cout<<endl<<endl;
 
-    while(not kolejka.empty())
+    while(! kolejka.empty())
     {
-        pisz_kolejke(kolejka,stos_pojazdow);
+        pisz_kolejke(kolejka, stos_pojazdow);
     }
 
 cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
@@ -114,7 +110,7 @@ void tworzenie_kolejki()
     }
 }
 
-void pisz_kolejke(queue<float> kolejka,vector<ciezarowki> stos_pojazdow )
+void pisz_kolejke(queue<float> kolejka, vector<ciezarowki> stos_pojazdow )
 {
      system ("cls");
 
@@ -122,7 +118,7 @@ void pisz_kolejke(queue<float> kolejka,vector<ciezarowki> stos_pojazdow )
 
     cout<<"\n\n\n\n     ";
 
-    while(not kolejka.empty())
+    while(! kolejka.empty())
     {
         cout<<"  "<<setprecision(3)<<kolejka.front()<<"  ";
         kolejka.pop();
@@ -138,9 +134,8 @@ void pisz_kolejke(queue<float> kolejka,vector<ciezarowki> stos_pojazdow )
     }
      cout<<">\n"<<endl;
 
-     ciezarowki pojazd;
 
-     while(not stos_pojazdow.empty())
+     while(! stos_pojazdow.empty())
      {
         pisz_pojazd((stos_pojazdow.front()));
         stos_pojazdow.erase(stos_pojazdow.begin());
@@ -167,7 +162,7 @@ void ladowanie()
 
     vector<float> buf;
 
-    while(not kolejka.empty())
+    while(! kolejka.empty())
     {
         buf.push_back(kolejka.front());
         kolejka.pop();
@@ -175,7 +170,7 @@ void ladowanie()
 
     while(x)
     {
-        if(not buf.empty())
+        if(! buf.empty())
         {
             x=(stos_pojazdow.back()).doloz(buf.back());
 
@@ -189,32 +184,30 @@ void ladowanie()
        else x=0;
     }
 
-    while(not buf.empty())
+    while(! buf.empty())
         {
             kolejka.push(buf.front());
             buf.erase(buf.begin());
         }
 
-
-
 }
 
 void pisz_pojazd(ciezarowki pojazd)
 {
-    int licznik2=0,licznik3;
+    int licznik2 = 0, licznik3;
     float waga=pojazd.getWeight();
 
     cout<<"\n                          /---| ";
 
     ciezarowki buf(pojazd.getCapacity());
 
-     while(not pojazd.empty())
+     while(! pojazd.empty())
     {
         buf.doloz(pojazd.top());
         pojazd.zdejmij();
     }
 
-    while(not buf.empty())
+    while(! buf.empty())
     {
        cout<<setprecision(3)<< setw(5)<<buf.top()<<" ";
        buf.zdejmij();
@@ -222,6 +215,7 @@ void pisz_pojazd(ciezarowki pojazd)
     }
 
     licznik3=licznik2;
+	licznik = licznik2;
 
     cout<<"\n                          |---| ";
 
@@ -231,15 +225,15 @@ void pisz_pojazd(ciezarowki pojazd)
       licznik3--;
     }
 
-    cout<<"\n   Pojemnosc: "<< setw(4)<<pojazd.getCapacity()<<"        ";
+	cout << "\n   Pojemnosc: " << setw(4) << pojazd.getCapacity() << "        ";
 
-    while(licznik2+1)
+    while(licznik2 + 1)
     {
        cout<<" o  o ";
        licznik2--;
     }
 
-    cout<<setprecision(3)<<"  Zaladowano: "<<licznik<<" pacz. o masie: "<<setprecision(3)<<waga<<endl<<endl<<endl;
+	cout << setprecision(3) << "  Zaladowano: " << licznik << " pacz. o masie: " << setprecision(3) << waga << endl << endl << endl;
 }
 
 
