@@ -30,7 +30,7 @@ class ciezarowki {
 
             bool doloz(float i)
              {
-                    if (weight+i<= capacity)
+                    if (weight+i - capacity <= 0.01)
                         {
                             weight+=i;
                             Stack.push(i);
@@ -40,8 +40,7 @@ class ciezarowki {
             }
 
             float& top() { return Stack.top();}
-            bool empty() {return Stack.empty();}
-            size_t size() {return Stack.size();}
+            bool empty() {return Stack.empty();}          
 
       private:
            stack<float> Stack;
@@ -56,8 +55,6 @@ queue<float> kolejka;
 vector<ciezarowki> stos_pojazdow;
 
 
-
-
 void writeStack (ciezarowki, vector<ciezarowki>);
 int start();
 void tworzenie_kolejki();
@@ -65,7 +62,7 @@ void pisz_kolejke(queue<float>,vector<ciezarowki>);
 void dodaj_pojazd();
 void ladowanie();
 void pisz_pojazd(ciezarowki);
-
+void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
 
 
 int main(void)
@@ -81,6 +78,9 @@ int main(void)
     {
         pisz_kolejke(kolejka, stos_pojazdow);
     }
+
+	system("cls");
+	pisz_wszystkie_pojazdy(stos_pojazdow);
 
 cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
 
@@ -134,14 +134,19 @@ void pisz_kolejke(queue<float> kolejka, vector<ciezarowki> stos_pojazdow )
     }
      cout<<">\n"<<endl;
 
-
-     while(! stos_pojazdow.empty())
-     {
-        pisz_pojazd((stos_pojazdow.front()));
-        stos_pojazdow.erase(stos_pojazdow.begin());
-     }
+	 pisz_wszystkie_pojazdy(stos_pojazdow);
 
      dodaj_pojazd();
+}
+
+void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow){
+
+	while (!stos_pojazdow.empty())
+	{
+		pisz_pojazd((stos_pojazdow.front()));
+		stos_pojazdow.erase(stos_pojazdow.begin());
+	}
+
 }
 
 void dodaj_pojazd()
