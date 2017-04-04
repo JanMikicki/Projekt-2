@@ -64,7 +64,6 @@ void ladowanie();
 void pisz_pojazd(ciezarowki);
 void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
 void odjazd(int);
-void wyjscie();
 void start();
 
 
@@ -96,18 +95,22 @@ void start()
 
     cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
     int a;
-    cout<<"            1) Sortuj kolejne paczki: 1\n";
-    cout<<"            2) Wyjscie:               0\n";
+    cout<<"            1) Sortuj kolejne paczki:	'1'\n";
+    cout<<"            2) Wyjscie:                  '0'\n";
 
-    while(!(cin>>a))
-    {
-        cout<<"\n\n          Zla wartosc! Podaj 1 lub 0! : ";
 
-        cin.clear();
-        cin.sync();
-    }
+	do {
 
-     cin.sync();
+	cin >> a;
+
+	while (cin.fail() || cin.peek() != '\n') {
+		cout << "\n		Zla wartosc." << endl;
+		cin.clear();
+		cin.ignore(256, '\n');
+		cin >> a;
+	}
+
+	} while (a != 1 && a != 0);
 
     if(a==1)
     {
@@ -135,19 +138,20 @@ int ilosc()
     cout<<"\n\n\n                                SORTOWNIA\n\n                               Wyjscie - 0\n\n";
     cout<<"                  Podaj ilosc paczek do posortowania: ";
 
-    while(!(cin>>x))
-    {
-        cout<<"\n\n          Zla wartosc! Podaj liczbe calkowita! : ";
+	cin >> x;
 
-        cin.clear();
-        cin.sync();
-    }
+	while (cin.fail() || cin.peek() != '\n') {
+		cout << "\n		Zla wartosc." << endl;
+		cin.clear();
+		cin.ignore(256, '\n');
+		cout << "                  Podaj ilosc paczek do posortowania: ";
+		cin >> x;
+	}
 
     if(x==0)
     {
         exit (2);
-    }
-     cin.sync();
+    }   
 
     return x;
 }
@@ -211,20 +215,20 @@ void dodaj_pojazd()
 {
     cout<<"\n\n        Wyjscie - 0\n\n\n        Pojemnosc ciezarowki: ";
 
-    while(!(cin>>pojemnosc))
-    {
-        cout<<"\n\n          Zla wartosc! Podaj liczbe calkowita! : ";
+	cin >> pojemnosc;
 
-        cin.clear();
-        cin.sync();
-    }
+	while (cin.fail() || cin.peek() != '\n') {
+		cout << "\n		Zla wartosc." << endl;
+		cin.clear();
+		cin.ignore(256, '\n');
+		cout << "\n        Pojemnosc ciezarowki: ";
+		cin >> pojemnosc;
+	}
 
      if(pojemnosc==0)
     {
         exit (3);
     }
-
-    cin.sync();
 
     ciezarowki ciezarowka(pojemnosc);
 
@@ -327,7 +331,7 @@ void odjazd(int a)
         x--;
     }
 
-    cout<<"/---| Dowidzenia  \n";
+    cout<<"/---| Do widzenia  \n";
 
     x=a;
     while(x)
@@ -353,7 +357,7 @@ void odjazd(int a)
     {
         system ("cls");
 
-        cout<<"\n---| Dowidzenia  \n";
+        cout<<"\n---| Do widzenia  \n";
         cout<<"---|-------------- \n";
         cout<<"o   o   o   o   o   \n\n\n";
 
@@ -361,7 +365,7 @@ void odjazd(int a)
 
         system ("cls");
 
-        cout<<"\n--| Dowidzenia  \n";
+        cout<<"\n--| Do widzenia  \n";
         cout<<"--|-------------- \n";
         cout<<"   o   o   o   o \n\n\n";
 
@@ -369,7 +373,7 @@ void odjazd(int a)
 
         system ("cls");
 
-        cout<<"\n-| Dowidzenia  \n";
+        cout<<"\n-| Do widzenia  \n";
         cout<<"-|-------------- \n";
         cout<<"  o   o   o   o \n\n\n";
 
@@ -377,7 +381,7 @@ void odjazd(int a)
 
         system ("cls");
 
-        cout<<"\n| Dowidzenia  \n";
+        cout<<"\n| Do widzenia  \n";
         cout<<"|-------------- \n";
         cout<<" o   o   o   o  \n\n\n";
 
@@ -385,7 +389,7 @@ void odjazd(int a)
 
         system ("cls");
 
-        cout<<"\n Dowidzenia  \n";
+        cout<<"\n Do widzenia  \n";
         cout<<"-------------- \n";
         cout<<"   o   o   o \n\n\n";
 
