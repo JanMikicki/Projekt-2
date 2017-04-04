@@ -6,6 +6,7 @@
 #include<vector>
 #include<cstdlib>
 #include <ctime>
+#include<windows.h>
 
 using namespace std;
 
@@ -30,7 +31,7 @@ class ciezarowki {
 
             bool doloz(float i)
              {
-                    if (weight+i - capacity <= 0.01)
+                    if (weight+i <= capacity)
                         {
                             weight+=i;
                             Stack.push(i);
@@ -40,7 +41,7 @@ class ciezarowki {
             }
 
             float& top() { return Stack.top();}
-            bool empty() {return Stack.empty();}          
+            bool empty() {return Stack.empty();}
 
       private:
            stack<float> Stack;
@@ -49,8 +50,7 @@ class ciezarowki {
       };
 
 
-int ilosc_paczek, licznik = 0;
-float pojemnosc = 0;
+int ilosc_paczek, licznik = 0,pojemnosc = 0;
 queue<float> kolejka;
 vector<ciezarowki> stos_pojazdow;
 
@@ -63,6 +63,7 @@ void dodaj_pojazd();
 void ladowanie();
 void pisz_pojazd(ciezarowki);
 void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
+void odjazd(int);
 
 
 int main(void)
@@ -82,9 +83,18 @@ int main(void)
 	system("cls");
 	pisz_wszystkie_pojazdy(stos_pojazdow);
 
-cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
+    cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
 
-     system("pause");
+    system("pause");
+
+    int a=50 ;
+
+    while(a+1)
+    {
+       odjazd(a);
+       a--;
+    }
+
      return 0;
 }
 
@@ -93,7 +103,17 @@ int start()
     int x;
     cout<<"\n\n\n                                SORTOWNIA\n\n\n";
     cout<<"                  Podaj ilosc paczek do posortowania: ";
-    cin>>x;
+
+    while(!(cin>>x))
+    {
+        cout<<"\n\n          Zla wartosc! Podaj liczbe calkowita! : ";
+
+        cin.clear();
+        cin.sync();
+    }
+
+     cin.sync();
+
     return x;
 }
 
@@ -139,7 +159,8 @@ void pisz_kolejke(queue<float> kolejka, vector<ciezarowki> stos_pojazdow )
      dodaj_pojazd();
 }
 
-void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow){
+void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow)
+{
 
 	while (!stos_pojazdow.empty())
 	{
@@ -152,7 +173,16 @@ void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow){
 void dodaj_pojazd()
 {
     cout<<"\n\n  Pojemnosc ciezarowki: ";
-    cin>>pojemnosc;
+
+    while(!(cin>>pojemnosc))
+    {
+        cout<<"\n\n          Zla wartosc! Podaj liczbe calkowita! : ";
+
+        cin.clear();
+        cin.sync();
+    }
+
+    cin.sync();
 
     ciezarowki ciezarowka(pojemnosc);
 
@@ -238,7 +268,184 @@ void pisz_pojazd(ciezarowki pojazd)
        licznik2--;
     }
 
-	cout << setprecision(3) << "  Zaladowano: " << licznik << " pacz. o masie: " << setprecision(3) << waga << endl << endl << endl;
+	cout << setprecision(3) << "  Zaladowano: " << licznik << " pacz. o masie: " << setprecision(5) << waga << endl << endl << endl;
+}
+
+void odjazd(int a)
+{
+    system ("cls");
+
+    int x=a;
+
+    cout<<"\n";
+    while(x)
+    {
+        cout<<" ";
+        x--;
+    }
+
+    cout<<"/---| Dowidzenia  \n";
+
+    x=a;
+    while(x)
+    {
+        cout<<" ";
+        x--;
+    }
+
+    cout<<"|---|-------------- \n";
+
+    x=a;
+    while(x)
+    {
+        cout<<" ";
+        x--;
+    }
+
+    cout<<" o   o   o   o   o \n\n\n";
+
+    Sleep(30);
+
+    if(a==0)
+    {
+        system ("cls");
+
+        cout<<"\n---| Dowidzenia  \n";
+        cout<<"---|-------------- \n";
+        cout<<"o   o   o   o   o   \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n--| Dowidzenia  \n";
+        cout<<"--|-------------- \n";
+        cout<<"   o   o   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n-| Dowidzenia  \n";
+        cout<<"-|-------------- \n";
+        cout<<"  o   o   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n| Dowidzenia  \n";
+        cout<<"|-------------- \n";
+        cout<<" o   o   o   o  \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n Dowidzenia  \n";
+        cout<<"-------------- \n";
+        cout<<"   o   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nDowidzenia \n";
+        cout<<"------------- \n";
+        cout<<"   o   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nowidzenia \n";
+        cout<<"------------ \n";
+        cout<<"  o   o   o  \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nwidzenia \n";
+        cout<<"----------- \n";
+        cout<<"o   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nidzenia \n";
+        cout<<"---------- \n";
+        cout<<"   o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\ndzenia \n";
+        cout<<"--------- \n";
+        cout<<"  o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nzenia \n";
+        cout<<"-------- \n";
+        cout<<" o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nenia \n";
+        cout<<"------- \n";
+        cout<<"o   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nnia \n";
+        cout<<"------ \n";
+        cout<<"   o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\nia \n";
+        cout<<"----- \n";
+        cout<<"  o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\na \n";
+        cout<<"---- \n";
+        cout<<" o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n \n";
+        cout<<"--- \n";
+        cout<<"o \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+
+        cout<<"\n\n";
+        cout<<"-- \n";
+        cout<<" \n\n\n";
+
+        Sleep(30);
+
+        system ("cls");
+    }
 }
 
 
