@@ -56,7 +56,7 @@ vector<ciezarowki> stos_pojazdow;
 
 
 void writeStack (ciezarowki, vector<ciezarowki>);
-int start();
+int ilosc();
 void tworzenie_kolejki();
 void pisz_kolejke(queue<float>,vector<ciezarowki>);
 void dodaj_pojazd();
@@ -65,24 +65,25 @@ void pisz_pojazd(ciezarowki);
 void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
 void odjazd(int);
 void wyjscie();
-void st();
+void start();
 
 
 int main(void)
 {
     srand(time(NULL));
 
-    ilosc_paczek=start();
-
-    st();
-
+    start();
 
      return 0;
 }
 
-void st()
+void start()
 {
+
+    ilosc_paczek=ilosc();
+
     tworzenie_kolejki();
+
     cout<<endl<<endl;
 
     while(! kolejka.empty())
@@ -102,7 +103,6 @@ void st()
     if(a==1)
     {
         start();
-        st();
     }
 
     if(a==0)
@@ -118,7 +118,7 @@ void st()
 
 }
 
-int start()
+int ilosc()
 {
     system ("cls");
 
