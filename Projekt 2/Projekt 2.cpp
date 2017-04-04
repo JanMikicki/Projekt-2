@@ -1,11 +1,11 @@
-
+//Techniki programowania - Projekt 2 - Pawel Wilgan Jan Mikicki
 #include<iostream>
 #include<iomanip>
 #include<stack>
 #include<queue>
 #include<vector>
 #include<cstdlib>
-#include <ctime>
+#include<ctime>
 #include<windows.h>
 
 using namespace std;
@@ -65,6 +65,7 @@ void pisz_pojazd(ciezarowki);
 void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
 void odjazd(int);
 void start();
+void koniec();
 
 
 int main(void)
@@ -76,10 +77,11 @@ int main(void)
      return 0;
 }
 
+
 void start()
 {
 
-    ilosc_paczek=ilosc();
+    ilosc_paczek = ilosc();
 
     tworzenie_kolejki();
 
@@ -90,45 +92,10 @@ void start()
         pisz_kolejke(kolejka, stos_pojazdow);
     }
 
-    system("cls");
-	pisz_wszystkie_pojazdy(stos_pojazdow);
-
-    cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
-    int a;
-    cout<<"            1) Sortuj kolejne paczki:	'1'\n";
-    cout<<"            2) Wyjscie:                  '0'\n";
-
-
-	do {
-
-	cin >> a;
-
-	while (cin.fail() || cin.peek() != '\n') {
-		cout << "\n		Zla wartosc." << endl;
-		cin.clear();
-		cin.ignore(256, '\n');
-		cin >> a;
-	}
-
-	} while (a != 1 && a != 0);
-
-    if(a==1)
-    {
-        start();
-    }
-
-    if(a==0)
-    {
-       int a=50 ;
-
-        while(a+1)
-        {
-           odjazd(a);
-           a--;
-        }
-    }
-
+  
+	koniec();
 }
+
 
 int ilosc()
 {
@@ -156,6 +123,7 @@ int ilosc()
     return x;
 }
 
+
 void tworzenie_kolejki()
 {
     for(int i=0;i<ilosc_paczek;i++)
@@ -168,6 +136,7 @@ void tworzenie_kolejki()
        kolejka.push(x);
     }
 }
+
 
 void pisz_kolejke(queue<float> kolejka, vector<ciezarowki> stos_pojazdow )
 {
@@ -198,18 +167,6 @@ void pisz_kolejke(queue<float> kolejka, vector<ciezarowki> stos_pojazdow )
      dodaj_pojazd();
 }
 
-void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow)
-{
-
-	while (!stos_pojazdow.empty())
-	{
-		pisz_pojazd((stos_pojazdow.front()));
-		stos_pojazdow.erase(stos_pojazdow.begin());
-	}
-
-}
-
-
 
 void dodaj_pojazd()
 {
@@ -236,6 +193,7 @@ void dodaj_pojazd()
 
     ladowanie();
 }
+
 
 void ladowanie()
 {
@@ -272,6 +230,19 @@ void ladowanie()
         }
 
 }
+
+
+void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow)
+{
+
+	while (!stos_pojazdow.empty())
+	{
+		pisz_pojazd((stos_pojazdow.front()));
+		stos_pojazdow.erase(stos_pojazdow.begin());
+	}
+
+}
+
 
 void pisz_pojazd(ciezarowki pojazd)
 {
@@ -317,6 +288,49 @@ void pisz_pojazd(ciezarowki pojazd)
 
 	cout << setprecision(3) << "  Zaladowano: " << licznik << " pacz. o masie: " << setprecision(5) << waga << endl << endl << endl;
 }
+
+
+void koniec() {
+
+	system("cls");
+	pisz_wszystkie_pojazdy(stos_pojazdow);
+
+	cout << "\n                  Koniec zaladunku  ^_^  \n\n\n\n";
+	int a;
+	cout << "            1) Sortuj kolejne paczki:	'1'\n";
+	cout << "            2) Wyjscie:                '0'\n";
+
+
+	do {
+
+		cin >> a;
+
+		while (cin.fail() || cin.peek() != '\n') {
+			cout << "\n		Zla wartosc." << endl;
+			cin.clear();
+			cin.ignore(256, '\n');
+			cin >> a;
+		}
+
+	} while (a != 1 && a != 0);
+
+	if (a == 1)
+	{
+		start();
+	}
+
+	if (a == 0)
+	{
+		int a = 50;
+
+		while (a + 1)
+		{
+			odjazd(a);
+			a--;
+		}
+	}
+}
+
 
 void odjazd(int a)
 {
