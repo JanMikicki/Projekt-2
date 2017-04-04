@@ -64,6 +64,8 @@ void ladowanie();
 void pisz_pojazd(ciezarowki);
 void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow);
 void odjazd(int);
+void wyjscie();
+void st();
 
 
 int main(void)
@@ -72,6 +74,14 @@ int main(void)
 
     ilosc_paczek=start();
 
+    st();
+
+
+     return 0;
+}
+
+void st()
+{
     tworzenie_kolejki();
     cout<<endl<<endl;
 
@@ -80,28 +90,40 @@ int main(void)
         pisz_kolejke(kolejka, stos_pojazdow);
     }
 
-	system("cls");
+    system("cls");
 	pisz_wszystkie_pojazdy(stos_pojazdow);
 
     cout<<"\n                  Koniec zaladunku  ^_^  \n\n\n\n";
+    int a;
+    cout<<"            1) Sortuj kolejne paczki: 1\n";
+    cout<<"            2) Wyjscie:               0\n";
+    cin>>a;
 
-    system("pause");
-
-    int a=50 ;
-
-    while(a+1)
+    if(a==1)
     {
-       odjazd(a);
-       a--;
+        start();
+        st();
     }
 
-     return 0;
+    if(a==0)
+    {
+       int a=50 ;
+
+        while(a+1)
+        {
+           odjazd(a);
+           a--;
+        }
+    }
+
 }
 
 int start()
 {
+    system ("cls");
+
     int x;
-    cout<<"\n\n\n                                SORTOWNIA\n\n\n";
+    cout<<"\n\n\n                                SORTOWNIA\n\n                               Wyjscie - 0\n\n";
     cout<<"                  Podaj ilosc paczek do posortowania: ";
 
     while(!(cin>>x))
@@ -112,6 +134,10 @@ int start()
         cin.sync();
     }
 
+    if(x==0)
+    {
+        exit (2);
+    }
      cin.sync();
 
     return x;
@@ -170,9 +196,11 @@ void pisz_wszystkie_pojazdy(vector<ciezarowki> &stos_pojazdow)
 
 }
 
+
+
 void dodaj_pojazd()
 {
-    cout<<"\n\n  Pojemnosc ciezarowki: ";
+    cout<<"\n\n        Wyjscie - 0\n\n\n        Pojemnosc ciezarowki: ";
 
     while(!(cin>>pojemnosc))
     {
@@ -180,6 +208,11 @@ void dodaj_pojazd()
 
         cin.clear();
         cin.sync();
+    }
+
+     if(pojemnosc==0)
+    {
+        exit (3);
     }
 
     cin.sync();
@@ -232,7 +265,8 @@ void pisz_pojazd(ciezarowki pojazd)
     int licznik2 = 0, licznik3;
     float waga=pojazd.getWeight();
 
-    cout<<"\n                          /---| ";
+
+    cout<<"\n\n\n\n                          /---| ";
 
     ciezarowki buf(pojazd.getCapacity());
 
