@@ -98,7 +98,16 @@ void start()
     int a;
     cout<<"            1) Sortuj kolejne paczki: 1\n";
     cout<<"            2) Wyjscie:               0\n";
-    cin>>a;
+
+    while(!(cin>>a))
+    {
+        cout<<"\n\n          Zla wartosc! Podaj 1 lub 0! : ";
+
+        cin.clear();
+        cin.sync();
+    }
+
+     cin.sync();
 
     if(a==1)
     {
